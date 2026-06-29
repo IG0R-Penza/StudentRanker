@@ -1,4 +1,4 @@
-package com.example.StudentRanker.models;
+package com.example.StudentRanker.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name = "subjects_table")
-public class SubjectModel {
+public class SubjectEntity {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

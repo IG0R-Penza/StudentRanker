@@ -1,10 +1,10 @@
-package com.example.StudentRanker.services;
+package com.example.StudentRanker.service;
 
 import com.example.StudentRanker.dto.CreateSubjectDto;
 import com.example.StudentRanker.dto.EntitySubjectDto;
-import com.example.StudentRanker.mappers.SubjectMapper;
-import com.example.StudentRanker.models.SubjectModel;
-import com.example.StudentRanker.repositories.SubjectRepository;
+import com.example.StudentRanker.mapper.SubjectMapper;
+import com.example.StudentRanker.entity.SubjectEntity;
+import com.example.StudentRanker.repository.SubjectRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,17 +23,17 @@ public class SubjectService {
         subjectRepository.save(subjectMapper.createDtoToModel(subjectDto));
     }
 
-    public List<EntitySubjectDto> readAll() { return subjectMapper.modelsToEntityDto(subjectRepository.findAll()); }
+    public List<EntitySubjectDto> readAll() { return subjectMapper.entitiesToEntityDto(subjectRepository.findAll()); }
 
     public EntitySubjectDto read(Long id) {
-        if (subjectRepository.existsById(id)) return subjectMapper.modelToEntityDto(subjectRepository.getOne(id));
+        if (subjectRepository.existsById(id)) return subjectMapper.entityToEntityDto(subjectRepository.getReferenceById(id));
         else return null;
     }
 
     public boolean update(EntitySubjectDto entitySubjectDto){
         if (subjectRepository.existsById(entitySubjectDto.getId())) {
-            SubjectModel subjectModel = subjectMapper.entityDtoToModel(entitySubjectDto);
-            subjectRepository.save(subjectModel);
+            SubjectEntity subjectEntity = subjectMapper.entityDtoToModel(entitySubjectDto);
+            subjectRepository.save(subjectEntity);
             return true;
         }
         return false;

@@ -1,4 +1,4 @@
-package com.example.StudentRanker.models;
+package com.example.StudentRanker.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -6,7 +6,7 @@ import lombok.*;
 @Data
 @Entity
 @Table(name = "students_table")
-public class StudentModel {
+public class StudentEntity {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,5 +22,5 @@ public class StudentModel {
     private String patronymic;
 
     @Column(name = "group_name", nullable = false)
-    private String group_name;
+    private String groupName;
 }
