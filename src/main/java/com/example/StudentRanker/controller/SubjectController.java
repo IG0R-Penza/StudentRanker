@@ -1,26 +1,24 @@
-package com.example.StudentRanker.controllers;
+package com.example.StudentRanker.controller;
 
 import com.example.StudentRanker.dto.CreateSubjectDto;
 import com.example.StudentRanker.dto.EntitySubjectDto;
-import com.example.StudentRanker.services.SubjectService;
+import com.example.StudentRanker.service.SubjectService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/subject")
 @Tag(name = "Subject API", description = "API для управления предметами")
 public class SubjectController {
     private final SubjectService subjectService;
-
-    @Autowired
-    public SubjectController(SubjectService subjectService) { this.subjectService = subjectService; }
 
     @GetMapping("/")
     @Operation(

@@ -12,5 +12,5 @@ public class EntityStudentDto {
     private final String name;
     private final String patronymic;
     @NotBlank
-    private final String group_name;
+    private final String groupName;
 }

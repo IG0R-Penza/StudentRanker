@@ -1,10 +1,10 @@
-package com.example.StudentRanker.services;
+package com.example.StudentRanker.service;
 
 import com.example.StudentRanker.dto.CreateStudentDto;
 import com.example.StudentRanker.dto.EntityStudentDto;
-import com.example.StudentRanker.mappers.StudentMapper;
-import com.example.StudentRanker.models.StudentModel;
-import com.example.StudentRanker.repositories.StudentRepository;
+import com.example.StudentRanker.mapper.StudentMapper;
+import com.example.StudentRanker.entity.StudentEntity;
+import com.example.StudentRanker.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,17 +23,17 @@ public class StudentService {
         studentRepository.save(studentMapper.createDtoToModel(studentDto));
     }
 
-    public List<EntityStudentDto> readAll() { return studentMapper.modelsToEntityDto(studentRepository.findAll()); }
+    public List<EntityStudentDto> readAll() { return studentMapper.entitiesToEntityDto(studentRepository.findAll()); }
 
     public EntityStudentDto read(Long id) {
-        if (studentRepository.existsById(id)) return studentMapper.modelToEntityDto(studentRepository.getOne(id));
+        if (studentRepository.existsById(id)) return studentMapper.entityToEntityDto(studentRepository.getReferenceById(id));
         else return null;
     }
 
     public boolean update(EntityStudentDto entityStudentDto){
         if (studentRepository.existsById(entityStudentDto.getId())) {
-            StudentModel studentModel = studentMapper.entityDtoToModel(entityStudentDto);
-            studentRepository.save(studentModel);
+            StudentEntity studentEntity = studentMapper.entityDtoToModel(entityStudentDto);
+            studentRepository.save(studentEntity);
             return true;
         }
         return false;
