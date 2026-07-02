@@ -37,7 +37,9 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="88e04afc-d7d5-4771-8de8-4e53a61696a9" object-ref="schemas/public/tables/grades_table" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabasePrerequisiteManager">
     <prerequisites />
@@ -46,6 +48,9 @@
     <connection id="88e04afc-d7d5-4771-8de8-4e53a61696a9" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="88e04afc-d7d5-4771-8de8-4e53a61696a9" dataset="public.grades_table" active-filter-id="3b38ec4b-e6e7-4dfe-905e-fe1b9b03e8f9">
+      <filter id="3b38ec4b-e6e7-4dfe-905e-fe1b9b03e8f9" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
     <filter-actions connection-id="88e04afc-d7d5-4771-8de8-4e53a61696a9" dataset="public.subjects_table" active-filter-id="EMPTY_FILTER">
       <filter id="6d44ae4a-0bb5-47e5-ab23-d0812d1d642d" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND">
         <condition column="id" operator="=" value="" active="true" />

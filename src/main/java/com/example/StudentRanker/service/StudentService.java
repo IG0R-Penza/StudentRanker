@@ -4,20 +4,20 @@ import com.example.StudentRanker.dto.CreateStudentDto;
 import com.example.StudentRanker.dto.EntityStudentDto;
 import com.example.StudentRanker.mapper.StudentMapper;
 import com.example.StudentRanker.entity.StudentEntity;
+import com.example.StudentRanker.repository.GradeRepository;
 import com.example.StudentRanker.repository.StudentRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class StudentService {
     private final StudentRepository studentRepository;
     private final StudentMapper studentMapper;
 
-    public StudentService(StudentRepository studentRepository, StudentMapper studentMapper) {
-        this.studentRepository = studentRepository;
-        this.studentMapper = studentMapper;
-    }
+    private final GradeRepository gradeRepository;
 
     public void create(CreateStudentDto studentDto) {
         studentRepository.save(studentMapper.createDtoToModel(studentDto));
@@ -32,8 +32,7 @@ public class StudentService {
 
     public boolean update(EntityStudentDto entityStudentDto){
         if (studentRepository.existsById(entityStudentDto.getId())) {
-            StudentEntity studentEntity = studentMapper.entityDtoToModel(entityStudentDto);
-            studentRepository.save(studentEntity);
+            studentRepository.save(studentMapper.entityDtoToModel(entityStudentDto));
             return true;
         }
         return false;
@@ -41,6 +40,7 @@ public class StudentService {
 
     public boolean delete(Long id) {
         if (studentRepository.existsById(id)) {
+            gradeRepository.deleteByStudentId(id);
             studentRepository.deleteById(id);
             return true;
         }

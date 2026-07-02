@@ -49,6 +49,7 @@ public class StudentController {
             description = "Создаёт запись о студенте в базе данных"
     )
     @ApiResponse(responseCode = "201", description = "Запись создана")
+    @ApiResponse(responseCode = "400", description = "Некорректные данные")
     public ResponseEntity create(@RequestBody @Valid CreateStudentDto createStudentDto) {
         studentService.create(createStudentDto);
         return ResponseEntity.status(201).body(null);
@@ -61,6 +62,7 @@ public class StudentController {
     )
     @ApiResponse(responseCode = "204", description = "Изменения применены")
     @ApiResponse(responseCode = "404", description = "Студент не найден")
+    @ApiResponse(responseCode = "400", description = "Некорректные данные")
     public ResponseEntity update(@RequestBody @Valid EntityStudentDto entityStudentDto) {
         if (studentService.update(entityStudentDto)) return ResponseEntity.status(204).body(null);
         else return ResponseEntity.status(404).body(null);

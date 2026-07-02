@@ -49,6 +49,7 @@ public class SubjectController {
             description = "Создаёт запись о предмете в базе данных"
     )
     @ApiResponse(responseCode = "201", description = "Запись создана")
+    @ApiResponse(responseCode = "400", description = "Некорректные данные")
     public ResponseEntity create(@RequestBody @Valid CreateSubjectDto createSubjectDto) {
         subjectService.create(createSubjectDto);
         return ResponseEntity.status(201).body(null);
@@ -61,6 +62,7 @@ public class SubjectController {
     )
     @ApiResponse(responseCode = "204", description = "Изменения применены")
     @ApiResponse(responseCode = "404", description = "Предмет не найден")
+    @ApiResponse(responseCode = "400", description = "Некорректные данные")
     public ResponseEntity update(@RequestBody @Valid EntitySubjectDto entitySubjectDto) {
         if (subjectService.update(entitySubjectDto)) return ResponseEntity.status(204).body(null);
         else return ResponseEntity.status(404).body(null);
