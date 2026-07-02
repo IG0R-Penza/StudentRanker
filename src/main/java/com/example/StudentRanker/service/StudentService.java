@@ -3,15 +3,16 @@ package com.example.StudentRanker.service;
 import com.example.StudentRanker.dto.CreateStudentDto;
 import com.example.StudentRanker.dto.EntityStudentDto;
 import com.example.StudentRanker.mapper.StudentMapper;
-import com.example.StudentRanker.entity.StudentEntity;
 import com.example.StudentRanker.repository.GradeRepository;
 import com.example.StudentRanker.repository.StudentRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class StudentService {
     private final StudentRepository studentRepository;

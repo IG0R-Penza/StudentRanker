@@ -6,10 +6,12 @@ import com.example.StudentRanker.mapper.GradeMapper;
 import com.example.StudentRanker.repository.GradeRepository;
 import com.example.StudentRanker.repository.StudentRepository;
 import com.example.StudentRanker.repository.SubjectRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class GradeService {
     private final GradeRepository gradeRepository;
