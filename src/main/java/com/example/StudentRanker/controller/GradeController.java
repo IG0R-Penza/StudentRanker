@@ -1,7 +1,6 @@
 package com.example.StudentRanker.controller;
 
-import com.example.StudentRanker.dto.CreateGradeDto;
-import com.example.StudentRanker.dto.EntityGradeDto;
+import com.example.StudentRanker.dto.*;
 import com.example.StudentRanker.service.GradeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -10,6 +9,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -53,5 +54,28 @@ public class GradeController {
     public ResponseEntity delete(@PathVariable("id") Long id) {
         if (gradeService.delete(id)) return ResponseEntity.status(204).body(null);
         else return ResponseEntity.status(404).body(null);
+    }
+
+    @GetMapping("/student")
+    @Operation(
+            summary = "Данные об оценках студента",
+            description = "Возвращает список студентов с заданным ФИО, указывая для каждого студента ID, номер группы, все его оценки и средний балл"
+    )
+    @ApiResponse(responseCode = "200", description = "Список студентов с заданным ФИО, указывая для каждого студента ID, номер группы, все его оценки и средний балл")
+    @ApiResponse(responseCode = "404", description = "Студенты не найдены или не имеют оценок")
+    public ResponseEntity<List<StudentGradeDto>> getGradesByFullName(@RequestParam String surname, @RequestParam String name, @RequestParam(required = false) String patronymic) {
+        var res = gradeService.getGradesByFullName(surname, name, patronymic);
+        if (!res.isEmpty()) return ResponseEntity.status(200).body(res);
+        else return ResponseEntity.status(404).body(null);
+    }
+
+    @GetMapping("/rating")
+    @Operation(
+            summary = "Рейтинг студентов по сумме баллов",
+            description = "Возварщает список всех студентов, упорядоченный по сумме баллов"
+    )
+    @ApiResponse(responseCode = "200", description = "Рейтинг студентов")
+    public ResponseEntity<List<StudentRatingItemDto>> getStudentRating() {
+        return ResponseEntity.status(200).body(gradeService.getStudentRating());
     }
 }
