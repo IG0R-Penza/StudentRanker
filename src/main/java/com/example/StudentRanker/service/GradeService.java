@@ -26,7 +26,7 @@ public class GradeService {
     private final SubjectRepository subjectRepository;
 
     public boolean create(CreateGradeDto createGradeDto) {
-        if (studentRepository.existsById(createGradeDto.getStudentId()) && subjectRepository.existsById(createGradeDto.getSubjectId())){
+        if (!gradeRepository.existsByStudentIdAndSubjectIdAndSemester(createGradeDto.getStudentId(), createGradeDto.getSubjectId(), createGradeDto.getSemester()) && studentRepository.existsById(createGradeDto.getStudentId()) && subjectRepository.existsById(createGradeDto.getSubjectId())){
             gradeRepository.save(gradeMapper.createDtoToEntity(createGradeDto));
             return true;
         }

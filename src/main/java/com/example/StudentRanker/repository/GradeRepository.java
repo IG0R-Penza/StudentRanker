@@ -35,4 +35,6 @@ public interface GradeRepository extends JpaRepository<GradeEntity, Long> {
         join students_table stud on stud.id = sub.student_id
     """, nativeQuery = true)
     List<StudentRatingItemDto> getRatingByGradesSum();
+
+    boolean existsByStudentIdAndSubjectIdAndSemester(Long studentId, Long subjectId, Short semester);
 }
