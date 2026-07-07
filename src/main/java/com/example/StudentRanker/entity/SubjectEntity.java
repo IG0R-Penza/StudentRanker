@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -20,4 +23,7 @@ public class SubjectEntity {
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "subjectId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<GradeEntity> grades = new ArrayList<>();
 }
