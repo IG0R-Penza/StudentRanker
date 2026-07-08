@@ -2,6 +2,7 @@ package com.example.StudentRanker.repository;
 
 import com.example.StudentRanker.dto.StudentRatingItemDto;
 import com.example.StudentRanker.entity.GradeEntity;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -35,4 +36,8 @@ public interface GradeRepository extends JpaRepository<GradeEntity, Long> {
         join students_table stud on stud.id = sub.student_id
     """, nativeQuery = true)
     List<StudentRatingItemDto> getRatingByGradesSum();
+
+    boolean existsByStudentIdAndSubjectIdAndSemester(Long studentId, Long subjectId, Short semester);
+
+    GradeEntity getByStudentIdAndSubjectIdAndSemester(Long studentId, Long subjectId, Short semester);
 }

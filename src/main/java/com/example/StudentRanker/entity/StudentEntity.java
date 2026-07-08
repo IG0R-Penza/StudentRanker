@@ -3,6 +3,9 @@ package com.example.StudentRanker.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "students_table")
@@ -23,4 +26,7 @@ public class StudentEntity {
 
     @Column(name = "group_name", nullable = false)
     private String groupName;
+
+    @OneToMany(mappedBy = "studentId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<GradeEntity> grades = new ArrayList<>();
 }

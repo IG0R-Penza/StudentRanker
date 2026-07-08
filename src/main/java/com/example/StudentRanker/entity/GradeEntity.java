@@ -15,10 +15,10 @@ public class GradeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "student_id")
+    @Column(name = "student_id", insertable = false, updatable = false)
     private Long studentId;
 
-    @Column(name = "subject_id")
+    @Column(name = "subject_id", insertable = false, updatable = false)
     private Long subjectId;
 
     @Column(name = "semester")
@@ -26,4 +26,12 @@ public class GradeEntity {
 
     @Column(name = "value")
     private Short value;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
+    private StudentEntity student;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "subject_id", referencedColumnName = "id")
+    private SubjectEntity subject;
 }
