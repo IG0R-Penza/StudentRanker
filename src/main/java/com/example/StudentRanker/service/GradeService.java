@@ -84,12 +84,9 @@ public class GradeService {
             List<StudentGradeItemDto> gradeItemDtos = new ArrayList<>();
             int gradeSum = 0;
 
-            //List<GradeEntity> gradeEntities = gradeRepository.getAllByStudentId(student.getId());
-            //for (var grade : gradeEntities) {
             for (var grade : student.getGrades()) {
                 gradeSum+=grade.getValue();
                 gradeItemDtos.add(new StudentGradeItemDto(grade.getSubject().getName(), grade.getSemester(), grade.getValue()));
-                //gradeItemDtos.add(new StudentGradeItemDto(subjectRepository.getReferenceById(grade.getSubjectId()).getName(), grade.getSemester(), grade.getValue()));
             }
 
             if (!gradeItemDtos.isEmpty()) {
